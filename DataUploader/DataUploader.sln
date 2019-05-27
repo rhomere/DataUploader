@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataUploader", "DataUploade
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uploader", "Uploader\Uploader.csproj", "{4BEBD713-AE35-40AE-A58D-3DD7D18B0458}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uploader.Models", "Uploader.Models\Uploader.Models.csproj", "{77F6A4FE-7CFB-4A06-98E9-4A5AFF678E84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4BEBD713-AE35-40AE-A58D-3DD7D18B0458}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BEBD713-AE35-40AE-A58D-3DD7D18B0458}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BEBD713-AE35-40AE-A58D-3DD7D18B0458}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77F6A4FE-7CFB-4A06-98E9-4A5AFF678E84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77F6A4FE-7CFB-4A06-98E9-4A5AFF678E84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77F6A4FE-7CFB-4A06-98E9-4A5AFF678E84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77F6A4FE-7CFB-4A06-98E9-4A5AFF678E84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,8 +12,8 @@ namespace DataUploader
         static void Main(string[] args)
         {
             var service = new UploaderService();
-            service.LoadWorkbook(@"C:\Users\rhomere\Downloads\sample.xlsx");
-            service.ProcessWorksheet(1);
+            service.LoadWorkbook(@"C:\Users\rhomere\Downloads\sampleTest.xlsx");
+            service.ProcessWorksheet(2);
         }
     }
 }
