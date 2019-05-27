@@ -13,8 +13,8 @@ namespace Uploader
     public class UploaderService
     {
         Excel.Application XlApp = new Excel.Application();
-        Excel.Workbook XlWorkbook = null;// new Excel.Workbook();
-        Excel._Worksheet XlWorksheet = null;// new Excel.Worksheet();
+        Excel.Workbook XlWorkbook = null;
+        Excel._Worksheet XlWorksheet = null;
         Excel.Range XlRange = null;
 
         public UploaderService()
@@ -26,22 +26,16 @@ namespace Uploader
         {
             try
             {
-                Console.BackgroundColor = ConsoleColor.Green;
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine("Loading...");
-                XlWorkbook = XlApp.Workbooks.Open(path);//@"sandbox_test.xlsx"
-                Console.WriteLine("Loading Complete.");
+                ConsoleSuccessDisplay("Loading...");
+                
+                XlWorkbook = XlApp.Workbooks.Open(path);
+
+                ConsoleSuccessDisplay("Loading Complete");
                 Console.ResetColor();
             }
             catch(Exception e)
             {
-                Console.BackgroundColor = ConsoleColor.Red;
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine("\nError");
-                Console.WriteLine(e.Message);
-                Console.WriteLine("Stacktrace");
-                Console.WriteLine(e.StackTrace);
-                Console.ResetColor();
+                ConsoleErrorDisplay("Error", e);
             }
         }
 
@@ -49,10 +43,8 @@ namespace Uploader
         {
             try
             {
-                Console.BackgroundColor = ConsoleColor.Green;
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine("\nProcessing...\n");
-                Console.ResetColor();
+                ConsoleSuccessDisplay("Processing");
+                
                 XlWorksheet = XlWorkbook.Sheets[sheetNum];
                 XlRange = XlWorksheet.UsedRange;
                 for (int i = 1; i <= XlRange.Rows.Count; i++)
@@ -79,29 +71,42 @@ namespace Uploader
                         SiteZip = XlRange.Cells[i, 17].Value2.ToString(),
                     };
 
-                    Console.WriteLine($"{data.MunicipalNumber}, {data.Owner}, {data.MailingAddressLine1}, {data.Owner2}, {data.MailingAddressLine2}, {data.City}, {data.State}, {data.Zip}," +
-                        $" {data.SiteAddress}, {data.StreetNumber}, {data.StreetPrefix}, {data.CondoUnit}, {data.SiteCity}, {data.SiteZip}");
+                    //Console.WriteLine($"{data.MunicipalNumber}, {data.Owner}, {data.MailingAddressLine1}, {data.Owner2}, {data.MailingAddressLine2}, {data.City}, {data.State}, {data.Zip}," +
+                    //    $" {data.SiteAddress}, {data.StreetNumber}, {data.StreetPrefix}, {data.CondoUnit}, {data.SiteCity}, {data.SiteZip}");
+                    Console.Write(".");
                 }
-                Console.BackgroundColor = ConsoleColor.Green;
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine("\nProcessing Complete\n");
-                Console.ResetColor();
+                Console.WriteLine();
+                
+                ConsoleSuccessDisplay("Processing Complete");
             }
             catch (Exception e)
             {
-                Console.BackgroundColor = ConsoleColor.Red;
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine("\nError");
-                Console.WriteLine(e.Message);
-                Console.WriteLine("\nStacktrace");
-                Console.WriteLine(e.StackTrace);
-                Console.ResetColor();
+                ConsoleErrorDisplay("Error", e);
                 throw;
             }
             finally
             {
                 Cleanup();
             }
+        }
+
+        private void ConsoleSuccessDisplay(string text)
+        {
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine($"\n{text}\n");
+            Console.ResetColor();
+        }
+
+        private void ConsoleErrorDisplay(string text, Exception e)
+        {
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine($"\n{text}");
+            Console.WriteLine(e.Message);
+            Console.WriteLine("\nStacktrace");
+            Console.WriteLine(e.StackTrace);
+            Console.ResetColor();
         }
 
         private void Cleanup()
