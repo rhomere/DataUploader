@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Uploader\Uploader.csproj">
+      <Project>{4bebd713-ae35-40ae-a58d-3dd7d18b0458}</Project>
+      <Name>Uploader</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
