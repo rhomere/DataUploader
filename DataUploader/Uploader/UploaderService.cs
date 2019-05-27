@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,33 +45,53 @@ namespace Uploader
 
         public void ProcessWorksheet(int sheetNum)
         {
-            XlWorksheet = XlWorkbook.Sheets[sheetNum];
-            XlRange = XlWorksheet.UsedRange;
-            int j = 1;
-            for (int i = 1; i <= XlRange.Rows.Count; i++)
+            try
             {
-                var data = new Parcel();
-                data.Folio = XlRange.Cells[i, j].Value2.ToString();
-                data.Municiple = XlRange.Cells[i, j+1].Value2.ToString();
-                data.Description = XlRange.Cells[i, j+2].Value2.ToString();
+                XlWorksheet = XlWorkbook.Sheets[sheetNum];
+                XlRange = XlWorksheet.UsedRange;
+                for (int i = 1; i <= XlRange.Rows.Count; i++)
+                {
 
-                Console.WriteLine($"{data.Folio}, {data.Municiple}, {data.Description}");
-                //for (int j = 1; j <= XlRange.Columns.Count; j++)
-                //{
-                //    //new line
-                //    if (j == 1)
-                //        Console.Write("\r\n");
+                    var data = new Parcel
+                    {
+                        MunicipalNumber = XlRange.Cells[i, 1].Value2.ToString(),
+                        Owner = XlRange.Cells[i, 2].Value2.ToString(),
+                        Owner2 = XlRange.Cells[i, 3].Value2.ToString(),
+                        MailingAddressLine1 = XlRange.Cells[i, 4].Value2.ToString(),
+                        MailingAddressLine2 = XlRange.Cells[i, 5].Value2.ToString(),
+                        City = XlRange.Cells[i, 6].Value2.ToString(),
+                        State = XlRange.Cells[i, 7].Value2.ToString(),
+                        Zip = XlRange.Cells[i, 8].Value2.ToString(),
+                        SiteAddress = XlRange.Cells[i, 9].Value2.ToString(),
+                        StreetNumber = XlRange.Cells[i, 10].Value2.ToString(),
+                        StreetPrefix = XlRange.Cells[i, 11].Value2.ToString(),
+                        StreetName = XlRange.Cells[i, 12].Value2.ToString(),
+                        StreetNumberSuffix = XlRange.Cells[i, 13].Value2.ToString(),
+                        StreetSuffix = XlRange.Cells[i, 14].Value2.ToString(),
+                        CondoUnit = XlRange.Cells[i, 15].Value2.ToString(),
+                        SiteCity = XlRange.Cells[i, 16].Value2.ToString(),
+                        SiteZip = XlRange.Cells[i, 17].Value2.ToString(),
+                    };
 
-                //    //write the value to the console
-                //    if (XlRange.Cells[i, j] != null && XlRange.Cells[i, j].Value2 != null)
-                //        Console.Write(XlRange.Cells[i, j].Value2.ToString() + "\t");
+                    Console.WriteLine($"{data.MunicipalNumber}, {data.Owner}, {data.MailingAddressLine1}");
 
-                //    //add useful things here!   
-
-                //}
+                }
             }
-
-            Cleanup();
+            catch (Exception e)
+            {
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nError");
+                Console.WriteLine(e.Message);
+                Console.WriteLine("\nStacktrace");
+                Console.WriteLine(e.StackTrace);
+                Console.ResetColor();
+                throw;
+            }
+            finally
+            {
+                Cleanup();
+            }
         }
 
         private void Cleanup()
