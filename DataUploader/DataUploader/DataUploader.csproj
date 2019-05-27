@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Uploader.Models\Uploader.Models.csproj">
+      <Project>{77F6A4FE-7CFB-4A06-98E9-4A5AFF678E84}</Project>
+      <Name>Uploader.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Uploader\Uploader.csproj">
       <Project>{4bebd713-ae35-40ae-a58d-3dd7d18b0458}</Project>
       <Name>Uploader</Name>

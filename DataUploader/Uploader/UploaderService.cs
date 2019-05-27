@@ -12,10 +12,11 @@ namespace Uploader
 {
     public class UploaderService
     {
-        Excel.Application XlApp = new Excel.Application();
-        Excel.Workbook XlWorkbook = null;
-        Excel._Worksheet XlWorksheet = null;
-        Excel.Range XlRange = null;
+        private List<Parcel> ParcelData { get; set; } = new List<Parcel>();
+        private Excel.Application XlApp = new Excel.Application();
+        private Excel.Workbook XlWorkbook = null;
+        private Excel._Worksheet XlWorksheet = null;
+        private Excel.Range XlRange = null;
 
         public UploaderService()
         {
@@ -70,6 +71,7 @@ namespace Uploader
                         SiteCity = XlRange.Cells[i, 16].Value2.ToString(),
                         SiteZip = XlRange.Cells[i, 17].Value2.ToString(),
                     };
+                    ParcelData.Add(data);
 
                     //Console.WriteLine($"{data.MunicipalNumber}, {data.Owner}, {data.MailingAddressLine1}, {data.Owner2}, {data.MailingAddressLine2}, {data.City}, {data.State}, {data.Zip}," +
                     //    $" {data.SiteAddress}, {data.StreetNumber}, {data.StreetPrefix}, {data.CondoUnit}, {data.SiteCity}, {data.SiteZip}");
@@ -88,6 +90,11 @@ namespace Uploader
             {
                 Cleanup();
             }
+        }
+
+        public List<Parcel> GetParcelData()
+        {
+            return ParcelData;
         }
 
         private void ConsoleSuccessDisplay(string text)

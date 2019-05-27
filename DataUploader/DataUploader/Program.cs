@@ -14,6 +14,7 @@ namespace DataUploader
             var service = new UploaderService();
             service.LoadWorkbook(@"C:\Users\rhomere\Downloads\sampleTest.xlsx");
             service.ProcessWorksheet(2);
+            var data = service.GetParcelData();
         }
     }
 }
