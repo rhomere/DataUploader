@@ -1,2 +1,2 @@
 # DataUploader
-Upload Data form Excel Spreadsheet info Azure Sql Db
+Upload Data form Excel Spreadsheet info Azure Sql Db.
